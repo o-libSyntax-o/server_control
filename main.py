@@ -11,9 +11,13 @@ port = int(os.environ.get("SSH_PORT", "22"))
 username = os.environ["SSH_USERNAME"]
 password = os.environ["SSH_PASSWORD"]
 
-# Define the commands to run on the remote server
+# Update the server and install basics, then run a setup script for docker and vpn
 setup_commands = [
-    "sudo apt-get install git -y",
+    "suto apt-get update -y",
+    "sudo apt-get upgrade -y",
+    "sudo apt-get install curl -y",
+    "curl -O https://raw.githubusercontent.com/o-libSyntax-o/server_control/main/setup.sh",
+    "bash setup.sh",
 ]
 
 # Connect to the remote server over SSH
